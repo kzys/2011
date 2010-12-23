@@ -1,0 +1,127 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: rgb(255,204,0);
+}
+
+.gsc-control-cse {
+  padding: 0;
+}
+
+header, nav, article, section {
+  display: block;
+}
+
+header, nav, article, footer .inner {
+  margin: 1em auto 0 auto;
+  max-width: 40em;
+  padding: 0;
+  clear: both;
+  overflow: hidden;
+}
+nav {
+  text-align: right;
+}
+
+h1, h2, h3, footer p, a.permalink, nav a, .date, address {
+  font: normal 1em 'Helvetica Neue', sans-serif;
+}
+#container {
+  background: #fff;
+  clear: both;
+  overflow: hidden;
+}
+#container, header {
+  padding-bottom: 1em;
+}
+#container, footer {
+  padding: 0 0.5em;
+}
+
+p {
+  line-height: 1.5;
+}
+blockquote {
+  margin: 0 0 0 2em;
+}
+a {
+  color: rgb(76,188,215);
+}
+a:visited {
+  color: rgb(93,39,109);
+}
+a.permalink, nav a {
+  display: block;
+  font-size: 1.5em;
+  float: right;
+  padding: 1px;
+  color: #fff !important;
+  text-decoration: none;
+  background: rgb(153,210,85);
+}
+header h1 {
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+footer {
+  margin-top: 0;
+  color: #fff;
+}
+footer .inner {
+  padding: 1em 0.5em:
+}
+footer .intro {
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+}
+address {
+  margin: 2em 0 0 0;
+  font-style: normal;
+}
+
+.date {
+  font-size: 1.5em;
+}
+
+article h1, article h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+}
+article .header h2 {
+  float: left;
+}
+article .header {
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+article h3 {
+  font-size: 1em;
+  margin: 2em 0 0 0;
+}
+
+/*
+.sun {
+  padding: 0 0em 0 6em;
+}
+.mon {
+  padding: 0 1em 0 5em;
+}
+.tue {
+  padding: 0 2em 0 4em;
+}
+.wed {
+  padding: 0 3em 0 3em;
+}
+.thr {
+  padding: 0 4em 0 2em;
+}
+.fri {
+  padding: 0 5em 0 1em;
+}
+.sat {
+  padding: 0 6em 0 0em;
+}
+*/

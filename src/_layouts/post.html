@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<div id="container">
+  <nav><a href="/">Recent</a></nav>
+
+  <article>
+    <section>
+      <div class="header">
+        <div class="date">{{ page.date | date: "%b %-d" }}</div>
+        <h2>{{ page.title }}</h2>
+      </div>
+      <div class="content">{{ content }}</div>
+    </section>
+  </article>
+</div>

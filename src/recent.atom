@@ -1,0 +1,24 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Kato Kazuyoshi</title>
+  <link rel="self" href="http://blog.8-p.info/recent.atom" />
+  <link rel="alternate" href="http://blog.8-p.info/" />
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>http://blog.8-p.info/</id>
+  <author>
+    <name>Kato Kazuyoshi</name>
+  </author>
+
+  {% for post in site.posts limit: 5 %}
+  <entry>
+    <title>{{ post.title }}</title>
+    <link href="http://blog.8-p.info/2011/{{ post.url }}" />
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <id>http://blog.8-p.info/2011/{{ post.url }}</id>
+    <content type="html">{{ post.content | xml_escape }}</content>
+  </entry>
+  {% endfor %}
+</feed>
