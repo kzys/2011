@@ -67,6 +67,7 @@
 
         var footer = document.getElementsByTagName('footer')[0];
         document.body.insertBefore(juice.canvasElement(), footer);
+        footer.style.paddingTop = 0;
 
         google.load('search', '1', {language : 'en'});
         google.setOnLoadCallback(function() {
