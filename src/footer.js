@@ -1,57 +1,72 @@
 (function () {
-    var HEIGHT = 50;
+    var OrangeJuice = function (height) {
+        this.height = height;
 
-    function drawWithContext(ctx, width, alpha) {
-        ctx.fillStyle = 'rgba(255, 255, 255, ' + alpha + ')';
+        this._canvas = document.createElement('canvas');
+        this._canvas.height = this.height;
 
-        ctx.beginPath();
-        ctx.moveTo(0, HEIGHT * Math.random());
+        var instance = this;
+        window.onresize = function () {
+            instance._resize();
+        };
+        setInterval(function () {
+            instance._resize();
+        }, 1000);
 
-        var x = 0;
-        var y;
-        while (x < width) {
-            x += (width * 0.4) * Math.random();
-            y = HEIGHT * Math.random();
-            ctx.lineTo(x, y);
+        this._resize();
+    };
+
+    OrangeJuice.prototype = {
+        canvasElement: function () {
+            return this._canvas;
+        },
+
+        _resize: function () {
+            var c = this._canvas;
+            var w = document.body.offsetWidth;
+            if (c.width != w) {
+                c.width = w;
+                this._draw(c);
+            }
+        },
+
+        _draw: function (canvas) {
+            var ctx = canvas.getContext('2d');
+            var w = canvas.width;
+
+            this._drawWithContext(ctx, w, 1);
+
+            var i;
+            for (i = 0; i < 10; i++) {
+                this._drawWithContext(ctx, w, 0.2);
+            }
+        },
+
+        _drawWithContext: function (ctx, width, alpha) {
+            ctx.fillStyle = 'rgba(255, 255, 255, ' + alpha + ')';
+
+            ctx.beginPath();
+            ctx.moveTo(0, this.height * Math.random());
+
+            var x = 0;
+            var y;
+            while (x < width) {
+                x += (width * 0.4) * Math.random();
+                y = this.height * Math.random();
+                ctx.lineTo(x, y);
+            }
+
+            ctx.lineTo(width, 0);
+            ctx.lineTo(0, 0);
+            ctx.fill();
         }
-
-        ctx.lineTo(width, 0);
-        ctx.lineTo(0, 0);
-        ctx.fill();
-    }
-
-    function draw(canvas) {
-        var width = document.body.offsetWidth;
-        canvas.width = width;
-
-        var ctx = canvas.getContext('2d');
-        drawWithContext(ctx, width, 1);
-
-        var i;
-        for (i = 0; i < 10; i++) {
-            drawWithContext(ctx, width, 0.2);
-        }
-
-        return width;
     }
 
     function setup() {
-        var canvas = document.createElement('canvas');
-        canvas.height = HEIGHT;
+        var juice = new OrangeJuice(50);
 
         var footer = document.getElementsByTagName('footer')[0];
-        document.body.insertBefore(canvas, footer);
-
-        var prev = 0;
-        setInterval(function () {
-            if (prev != document.body.offsetWidth) {
-                prev = draw(canvas);
-            }
-        }, 1000);
-
-        window.onresize = function () {
-            prev = draw(canvas);
-        };
+        document.body.insertBefore(juice.canvasElement(), footer);
 
         google.load('search', '1', {language : 'en'});
         google.setOnLoadCallback(function() {
