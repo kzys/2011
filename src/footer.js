@@ -4,6 +4,7 @@
 
         this._canvas = document.createElement('canvas');
         this._canvas.height = this.height;
+        this._canvas.style.display = 'block';
 
         var instance = this;
         window.onresize = function () {
