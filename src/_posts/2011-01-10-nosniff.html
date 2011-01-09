@@ -1,0 +1,46 @@
+---
+title: "X-Content-Type-Options: nosniff"
+layout: post
+---
+<p>
+  I learned about X-Content-Type-Options on
+  <a href="http://d.hatena.ne.jp/hasegawayosuke/20110106/p1">Hasegawa Kyosuke's blog</a>.
+  But his article is little misleading.
+  Content-sniffing is long-lived feature.
+  In the old days, Marc Andreessen wrote about his (Mosaic's)
+  <a href="http://1997.webhistory.org/www.lists/www-talk.1993q1/0257.html">first implementation of IMG element</a>:
+</p>
+<blockquote>
+  <p>
+    For the time being, inlined images won’t be explicitly content-type’d;
+    down the road, we plan to support that
+    (along with the general adaptation of MIME).
+    Actually, the image reading routines we’re currently using figure out
+    the image format on the fly,
+    so the filename extension won’t even be significant.
+  </p>
+</blockquote>
+<p>
+  And now, many browsers implement
+  <a href="http://code.google.com/p/browsersec/wiki/Part2#Survey_of_content_sniffing_behaviors">Content-sniffing</a> differently.
+  <a href="http://src.chromium.org/viewvc/chrome/trunk/src/net/base/mime_sniffer.cc?view=markup">Chromiums's sniffer</a>
+  is well-commented and show the difficulty of the problem.
+</p>
+<h3>Can we prevent content-sniffing on any browsers?</h3>
+<p>
+  Intenet Explorer and
+  <a href="http://htaccess.wordpress.com/2009/09/22/x-content-type-options-nosniff-header/">Chromium</a>
+  see X-Content-Type-Options.
+  But according
+  <a href="http://www.browserscope.org/security/test">Browserscope's securty test</a>,
+  my Firefox 3.6.13 and my Safari 5.0.3 don't see this response header.
+  Of course, both browsers are don't interpret a corrupted image as HTML.
+  And <a href="https://developer.mozilla.org/en/How_Mozilla_determines_MIME_Types">Firefox follow the sever-sent type on standard-compliant mode</a>.
+</p>
+<p>
+  However Safari sniffed on application/octet-stream response
+  and interpret as HTML.
+  Safai also sniffed on text/plain response before
+  <a href="http://support.apple.com/kb/HT2343?viewlocale=en_US">Mac OS X 10.4.4</a>.
+  Take care!
+</p>
