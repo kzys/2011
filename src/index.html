@@ -10,7 +10,12 @@ layout: default
   <article class="{{ post.date | date: '%a' | downcase }}">
     <section>
       <div class="header">
-        <div class="date">{{ post.date | date: "%b %-d" }}</div>
+        <div class="date">
+          <time pubdate="pubdate"
+                datetime="{{ post.date | date: '%Y-%m-%d' }}">
+            {{ post.date | date: "%b %-d" }}
+          </time>
+        </div>
         <h2>{{ post.title }}</h2>
         <a class="permalink" href="/2011{{ post.url }}">Permalink</a>
       </div>

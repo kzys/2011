@@ -7,7 +7,12 @@ layout: default
   <article>
     <section>
       <div class="header">
-        <div class="date">{{ page.date | date: "%b %-d" }}</div>
+        <div class="date">
+          <time pubdate="pubdate"
+                datetime="{{ post.date | date: '%Y-%m-%d' }}">
+            {{ post.date | date: "%b %-d" }}
+          </time>
+        </div>
         <h2>{{ page.title }}</h2>
       </div>
       <div class="content">{{ content }}</div>
