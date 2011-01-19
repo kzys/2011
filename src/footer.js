@@ -63,6 +63,18 @@
         }
     }
 
+    function getTime(article) {
+        var time = article.getElementsByTagName('time')[0];
+        var ary = time.getAttribute('datetime').split(/-/);
+        return new Date(ary[0], parseInt(ary[1], 10)-1, ary[2]).getTime();
+    }
+
+    function createMarginElement(delta) {
+        var result = document.createElement('div');
+        result.style.marginTop = (delta * 10) + 'ex';
+        return result;
+    }
+
     function setup() {
         var juice = new OrangeJuice(50);
 
@@ -80,6 +92,17 @@
 
             control.draw('cse', options);
         }, true);
+
+        var articles = document.getElementsByTagName('article');
+        var i;
+        var delta;
+        for (i = 0; i < articles.length-1; i++) {
+            delta = getTime(articles[i]) - getTime(articles[i+1]);
+            delta /= (60 * 60 * 24 * 1000);
+
+            articles[i].parentNode.insertBefore(createMarginElement(delta),
+                                                articles[i+1])
+        }
     }
 
     if (Modernizr.canvas) {
