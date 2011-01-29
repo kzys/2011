@@ -4,6 +4,14 @@ body {
   background: rgb(255,204,0);
 }
 
+pre {
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
 .gsc-control-cse {
   padding: 0;
 }
