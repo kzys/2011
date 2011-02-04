@@ -6,7 +6,7 @@ layout: default
     <h1>Kato Kazuyoshi</h1>
     <div id="cse" style="width: 100%;">Loading</div>
   </header>
-  {% for post in site.posts limit: 5 %}
+  {% for post in site.posts limit: 10 %}
   <article class="{{ post.date | date: '%a' | downcase }}">
     <section>
       <div class="header">
