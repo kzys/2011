@@ -20,7 +20,7 @@ header, nav, article, section {
   display: block;
 }
 
-header, nav, article, footer .inner {
+header, nav, article, footer .inner, #archives {
   margin: 1em auto 0 auto;
   max-width: 40em;
   padding: 0;
@@ -66,6 +66,14 @@ a.permalink, nav a {
   color: #fff !important;
   text-decoration: none;
   background: rgb(153,210,85);
+  margin-left: 1em;
+}
+nav {
+  text-align: right;
+}
+nav a {
+  float: none;
+  display: inline;
 }
 header h1 {
   font-size: 1em;
