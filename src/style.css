@@ -22,7 +22,7 @@ header, nav, article, section {
 
 header, nav, article, footer .inner, #archives {
   margin: 1em auto 0 auto;
-  max-width: 40em;
+  max-width: 50em;
   padding: 0;
   clear: both;
   overflow: hidden;
