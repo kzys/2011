@@ -56,5 +56,23 @@ $rec-&gt;verify_ok(
 done_testing;
 </pre>
 <p>
-  
+  Test::Mock::Recorder provides a shortcut.
+  If you don't have to test the arguments here,
+  you can write like so:
+</p>
+<pre>
+...
+my $rec = Test::Mock::Recorder-&gt;new;
+$rec-&gt;expects(
+    add    => 0,
+    add    => 1,
+    delete => 1,
+);
+
+$rec-&gt;verify_ok(
+...
+</pre>
+<p>
+  If you have a comment or a question,
+  please email, blog, fork or tweet to me (@kzys).
 </p>
