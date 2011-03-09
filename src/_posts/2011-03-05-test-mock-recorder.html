@@ -1,0 +1,60 @@
+---
+title: "Test::Mock::Recorder"
+layout: post
+---
+<p>
+  In <a href="http://xunitpatterns.com/">xUnit Test Patterns</a>,
+  Gerard Meszaros introduce the term &quot;Test Double&quot;
+  and he lists varibous kinds of double: dummy object, fake object,
+  stub, spy, and mock.
+  You can read the summary at
+  <a href="http://martinfowler.com/bliki/TestDouble.html">Martin Folwer's
+    Bliki</a>.
+</p>
+<p>
+  Last year
+  I wrote own mock library for Perl.
+  We can use Test::MockObject as (Gerard's definition of) mock. But it's hard.
+  So my library provides &quot;record-and-verify&quot; style interface like
+  <a href="http://code.google.com/p/pymox/">Mox</a> or
+  <a href="http://mocha.rubyforge.org/">Mocha</a>.
+</p>
+<p>
+  However I gave a bad name &quot;Test::Double&quot;. It's unfocused.
+  So today I've renamed it to
+  <a href="https://github.com/kzys/test-mock-recorder">Test::Mock::Recorder</a>.
+</p>
+
+<h3>Example</h3>
+<p>
+  I wrote a small test for <a href="http://search.cpan.org/dist/KeyedMutex-Memcached/">KeyedMutex::Memcached</a>.
+  Test::Mock::Recorder verifies the arguments and the order of invocations.
+</p>
+<pre>
+use strict;
+use warnings;
+use Test::More;
+use Test::Mock::Recorder;
+
+use_ok 'KeyedMutex::Memcached';
+
+my $rec = Test::Mock::Recorder-&gt;new;
+$rec-&gt;expects('add')-&gt;with('km:online:123', 1, 30)-&gt;returns(0);
+$rec-&gt;expects('add')-&gt;with('km:online:123', 1, 30)-&gt;returns(1);
+$rec-&gt;expects('delete')-&gt;with('km:online:123');
+
+$rec-&gt;verify_ok(
+    sub {
+        my $km = KeyedMutex::Memcached-&gt;new(
+            cache =&gt; shift
+        );
+        $km-&gt;lock('online:123');
+        $km-&gt;release;
+    }
+);
+
+done_testing;
+</pre>
+<p>
+  
+</p>
