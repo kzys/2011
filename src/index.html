@@ -2,14 +2,11 @@
 layout: default
 ---
 <div id="container">
-  <nav>
-    <a href="{{ site.url }}archives.html">Archives</a>
-  </nav>
   <header>
     <h1>Kato Kazuyoshi</h1>
     <div id="cse" style="width: 100%;">Loading</div>
   </header>
-  {% for post in site.posts limit: 5 %}
+  {% for post in paginator.posts %}
   <article class="{{ post.date | date: '%a' | downcase }}">
     <section>
       <div class="header">
@@ -26,4 +23,17 @@ layout: default
     </section>
   </article>
   {% endfor %}
+
+  <div id="paginator">
+    <div id="newer">
+      {% if paginator.previous_page %}
+      <a href="{% if paginator.previous_page > 1 %}page{{paginator.previous_page}}{% endif %}/">&laquo; Newer</a>
+      {% endif %}
+    </div>
+    <div id="older">
+      {% if paginator.next_page %}
+      <a href="page{{paginator.next_page}}/">Older &raquo;</a>
+      {% endif %}
+    </div>
+  </div>
 </div>

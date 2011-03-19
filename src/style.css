@@ -12,6 +12,14 @@ pre {
   word-wrap: break-word;
 }
 
+#newer {
+  float: left;
+}
+
+#older {
+  float: right;
+}
+
 .gsc-control-cse {
   padding: 0;
 }

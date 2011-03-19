@@ -1,3 +1,4 @@
 auto: true
 permalink: /:month/:day/:title.html
 source: src
+paginate: 3
