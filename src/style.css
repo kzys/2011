@@ -33,7 +33,6 @@ header, nav, article, footer .inner, #archives {
   max-width: 50em;
   padding: 0;
   clear: both;
-  overflow: hidden;
 }
 nav {
   text-align: right;
@@ -68,7 +67,7 @@ a:visited {
 }
 a.permalink, nav a {
   display: block;
-  font-size: 1.5em;
+  font-size: 1em;
   float: right;
   padding: 1px;
   color: #fff !important;
@@ -106,21 +105,28 @@ address {
   font-style: normal;
 }
 
-.date {
-  font-size: 1.5em;
-}
-
 article h1, article h2 {
   margin: 0;
   padding: 0;
-  font-size: 1.5em;
+  font-size: 1em;
+  font-weight: bold;
 }
 article .header h2 {
   float: left;
 }
-article .header {
+.header {
   overflow: hidden;
+  clear: both;
+  font-size: 1em;
   margin-bottom: 1em;
+}
+
+.header .date {
+  float: left;
+  width: 4em;
+}
+.header h2 {
+  float: left;
 }
 article h3 {
   font-size: 1em;
