@@ -4,7 +4,7 @@ layout: default
 <div id="container">
   <header>
     <h1>Kato Kazuyoshi</h1>
-    <div id="cse" style="width: 100%;">Loading</div>
+    <div id="cse">Loading</div>
   </header>
   {% for post in paginator.posts %}
   <article class="{{ post.date | date: '%a' | downcase }}">
@@ -17,8 +17,8 @@ layout: default
           </time>
         </div>
         <h2>{{ post.title }}</h2>
-        <a class="permalink" href="/2011{{ post.url }}">Permalink</a>
       </div>
+      <a class="permalink" href="/2011{{ post.url }}">&raquo;</a>
       <div class="content">{{ post.content }}</div>
     </section>
   </article>
