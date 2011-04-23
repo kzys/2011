@@ -133,6 +133,20 @@ article .header h2 {
   margin-bottom: 1em;
 }
 
+article.quote h2 {
+  display: none;
+}
+article.quote blockquote {
+  margin: 0;
+  padding: 0;
+}
+article.quote p {
+  font-size: 120%;
+}
+article.quote p.by {
+  font-size: 100%;
+}
+
 .header h2 {
   float: left;
 }
