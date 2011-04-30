@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<div id="container">
+  <nav>
+    <a href="/">Recent</a>
+  </nav>
+
+  <article class="quote">
+    <section>
+      <div class="header">
+        <div class="date">
+          <time pubdate="pubdate"
+                datetime="{{ page.date | date: '%Y-%m-%d' }}">
+            {{ page.date | date: "%b %-d" }}
+          </time>
+        </div>
+      </div>
+      <div class="content">{{ content }}</div>
+    </section>
+  </article>
+</div>
