@@ -1,0 +1,157 @@
+---
+title: How to process a request in Play
+layout: post
+---
+<p>
+  <a href="http://www.playframework.org/">Play</a> is a brand-new
+  Web application framework for Java and
+  <a href="http://scala.playframework.org/">Scala</a>.
+  However Play doesn't use Servlet. Instead, Play uses
+  <a href="http://www.jboss.org/netty">Netty</a> for handling HTTP.
+  In this post, I'll show you how to process a request in Play.
+</p>
+<h3>play.server.Server</h3>
+<p>
+  play.server.Server has an entry point (main).
+</p>
+<pre>
+public static void main(String[] args) throws Exception {
+    ...
+        new Server(args);
+</pre>
+<p>
+  First, Server creates org.jboss.netty.bootstrap.ServerBootstrap and
+  play.server.HttpServerPipelineFactory.
+</p>
+<pre>
+ServerBootstrap bootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(
+        Executors.newCachedThreadPool(), Executors.newCachedThreadPool())
+);
+try {
+    if (httpPort != -1) {
+        bootstrap.setPipelineFactory(new HttpServerPipelineFactory());
+        bootstrap.bind(new InetSocketAddress(address, httpPort));
+        bootstrap.setOption(&quot;child.tcpNoDelay&quot;, true);
+</pre>
+<p>
+  And HttpServerPipelineFactory adds play.server.PlayHandler
+  into Netty's pipeline.
+</p>
+<p>
+  PlayHandler receives a message from Netty, and creates
+  play.server.NettyInvocation and pass it to play.Invoker.invoke.
+</p>
+<pre>
+// Deleguate to Play framework
+Invoker.invoke(new NettyInvocation(request, response, ctx, nettyRequest, e));
+</pre>
+<h3>play.server.NettyInvocation</h3>
+<p>
+  NettyInvocation#init handles static files,
+  NettyInvocation#getInvocationContext and
+  NettyInvocation#execute calls ActionInvoker to handle other request.
+</p>
+<h3>play.mvc.ActionInvoker</h3>
+<p>
+  ActionInvoker determines method, and call it.
+  play.mvc.Controller#render returns an result as an exception.
+</p>
+<pre>
+public static void invoke(Http.Request request, Http.Response response) {
+    Monitor monitor = null;
+     try {
+
+        resolve(request, response);
+        Method actionMethod = request.invokedMethod;
+
+        ...
+
+        // 3. Invoke the action
+        try {
+            // @Before
+            handleBefores(request);
+
+            // Action
+
+            <strong>Result actionResult = null;</strong>
+            String cacheKey = null;
+
+            ...
+
+            if (actionResult == null) {
+                ControllerInstrumentation.initActionCall();
+                try {
+                    <strong>inferResult(invokeControllerMethod(actionMethod));</strong>
+                } catch (InvocationTargetException ex) {
+                    // It's a Result ? (expected)
+                    if (ex.getTargetException() instanceof Result) {
+                        <strong>actionResult = (Result) ex.getTargetException();</strong>
+                        // Cache it if needed
+                        if (cacheKey != null) {
+                            ...
+                        }
+
+                    } else {
+                        ...
+                        throw ex;
+                    }
+                }
+            }
+
+           ...
+
+            // OK, re-throw the original action result
+            if (actionResult != null) {
+                <strong>throw actionResult;</strong>
+            }
+
+            throw new NoResult();
+
+        } catch (IllegalAccessException ex) {
+            throw ex;
+        } catch (IllegalArgumentException ex) {
+            throw ex;
+        } catch (InvocationTargetException ex) {
+            // It's a Result ? (expected)
+            if (ex.getTargetException() instanceof Result) {
+                <strong>throw (Result) ex.getTargetException();</strong>
+            }
+
+            ...
+
+            throw new JavaExecutionException(Http.Request.current().action, ex);
+        }
+
+    } catch (<strong>Result result</strong>) {
+
+        Play.pluginCollection.onActionInvocationResult(result);
+
+        // OK there is a result to apply
+        // Save session & flash scope now
+
+        Scope.Session.current().save();
+        Scope.Flash.current().save();
+
+        <strong>result.apply(request, response);</strong>
+
+        Play.pluginCollection.afterActionInvocation();
+
+        // @Finally
+        handleFinallies(request, null);
+
+    } catch (PlayException e) {
+        handleFinallies(request, e);
+        throw e;
+    } catch (Throwable e) {
+        handleFinallies(request, e);
+        throw new UnexpectedException(e);
+    } finally {
+        if (monitor != null) {
+            monitor.stop();
+        }
+    }
+}
+</pre>
+<p>
+  It's not straightforward for me. But I don't know why yet.
+</p>
