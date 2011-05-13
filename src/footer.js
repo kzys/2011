@@ -81,7 +81,7 @@
         var delta;
         for (i = 0; i < articles.length-1; i++) {
             delta = getTime(articles[i]) - getTime(articles[i+1]);
-            delta /= (60 * 60 * 24 * 1000);
+            delta /= (60 * 60 * 24 * 2000);
 
             articles[i].parentNode.insertBefore(createMarginElement(delta),
                                                 articles[i+1])
@@ -101,14 +101,6 @@
 
             control.draw('cse', options);
         }, true);
-
-        if (Modernizr.canvas) {
-            var juice = new OrangeJuice(50);
-
-            var footer = document.getElementsByTagName('footer')[0];
-            document.body.insertBefore(juice.canvasElement(), footer);
-            footer.style.paddingTop = 0;
-        }
     }
 
     setup();

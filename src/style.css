@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: rgb(255,204,0);
+  background: #f0f0f0;
 }
 
 pre {
@@ -10,6 +10,10 @@ pre {
   white-space: -o-pre-wrap;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+#paginator {
+  margin: 0 1em;
 }
 
 #newer {
@@ -24,34 +28,48 @@ header, nav, article, section {
   display: block;
 }
 
-header, nav, article, footer .inner, #archives {
-  margin: 1em auto 0 auto;
-  max-width: 50em;
+header, article, footer .inner, #archives {
+  margin: 1em;
   padding: 0;
   clear: both;
 }
 
-header {
-  margin-bottom: 5em;
-}
-header h1 {
-  float: left;
-}
 
 #cse {
-  width: 20em;
-  float: right;
+  margin: 1em 0 0 0;
 }
-
+#cse .gsc-tabsArea {
+  display: none;
+}
+#cse .gsc-search-box {
+  margin: 0;
+  width: 20em;
+}
+#cse .gsc-webResult {
+  margin: 1em 0 0 0;
+  padding: 0;
+}
+#cse .gsc-adBlock {
+  border: 1px solid #ccc;
+  margin: 1em 0 0 0;
+}
+#cse .gs-snippet {
+  margin: 0;
+}
+#cse .gsc-resultsHeader {
+  border: none;
+}
+#cse .gsc-cursor-box {
+  margin: 1em 0 0 0;
+}
+#cse .gsc-cursor-current-page {
+  color: #000;
+}
 .gsc-control-cse {
   padding: 0;
 }
 
-nav {
-  text-align: right;
-}
-
-h1, h2, h3, footer p, a.permalink, nav a, .date, address {
+h1, h2, h3, footer p, a.permalink, nav a, .date, address, #paginator {
   font: normal 1em 'Helvetica Neue', sans-serif;
 }
 #container {
@@ -62,13 +80,10 @@ h1, h2, h3, footer p, a.permalink, nav a, .date, address {
 #container, header {
   padding-bottom: 1em;
 }
-#container, footer {
-  padding: 0 0.5em;
+#paginator div {
+  font-size: 200%;
 }
 
-p, article .permalink {
-  line-height: 1.5;
-}
 blockquote {
   margin: 0 0 0 2em;
 }
@@ -78,31 +93,23 @@ a {
 a:visited {
   color: rgb(93,39,109);
 }
-a.permalink, nav a {
-  display: block;
-  font-size: 1em;
-  float: right;
-  padding: 1px;
-  color: #fff !important;
-  text-decoration: none;
-  background: rgb(153,210,85);
-}
-nav {
-  text-align: right;
-}
-nav a {
-  float: none;
-  display: inline;
+header {
+  margin-top: 0;
+  overflow: hidden;
+  padding: 1em 0;
+  border-bottom: 1px solid #000;
 }
 header h1 {
-  font-size: 1em;
   padding: 0;
   margin: 0;
 }
 footer {
-  margin-top: 0;
-  padding-top: 50px;
-  color: #fff;
+  margin-top: 1em;
+}
+footer a {
+  color: #000 !important;
+  font-weight: bold;
+  text-decoration: none;
 }
 footer .inner {
   padding: 1em 0.5em:
@@ -110,7 +117,7 @@ footer .inner {
 footer .intro {
   margin: 0;
   padding: 0;
-  font-size: 2em;
+  font-size: 100%;
 }
 address {
   margin: 2em 0 0 0;
@@ -120,17 +127,31 @@ address {
 article h1, article h2 {
   margin: 0;
   padding: 0;
-  font-size: 1em;
+  font-size: 200%;
   font-weight: bold;
+}
+article p {
+  max-width: 40em;
+}
+article pre {
+  background: #f0f0f0;
+  padding: 1em 2em;
+  margin: 0 -2em;
 }
 article .header h2 {
   float: left;
+  margin-right: 1em;
 }
 .header {
   overflow: hidden;
   clear: both;
   font-size: 1em;
   margin-bottom: 1em;
+}
+article .header .permalink {
+  font-size: 200%;
+  color: #ccc !important;
+  text-decoration: none;
 }
 
 article.quote h2 {
@@ -141,7 +162,6 @@ article.quote blockquote {
   padding: 0;
 }
 article.quote p {
-  font-size: 120%;
 }
 article.quote p.by {
   font-size: 100%;
@@ -155,15 +175,11 @@ article h3 {
   margin: 2em 0 0 0;
 }
 .header .date {
-  float: left;
-  width: 4em;
+  font-size: 200%;
+  color: #f00;
 }
 article .content {
-  margin: 0 0 0 4em;
-}
-article .permalink {
-  float: left;
-  padding: 0 1em;
+  margin: 0;
 }
 
 /*
