@@ -1,0 +1,72 @@
+---
+title: Play and Javassist
+layout: post
+---
+<p>
+  Scala 2.9 was released and Martin Odersky begin new company:
+  <a href="http://typesafe.com/">Typesafe, Inc</a>.
+  Typesafe's site is build by
+  <a href="http://twitter.com/#!/jboner/status/69394808044654593">Zenexity</a>. And of course,
+  <a href="http://www.zenexity.fr/#think">they</a>
+  use
+  <a href="http://twitter.com/#!/jboner/status/69394808044654593">Play and Scala</a>.
+</p>
+<h3>Cool thing</h3>
+<p>
+  On Play, you need to refresh your knowledge of a programming language.
+  Because some of methods know the
+  <strong>name</strong> of your variable.
+  The below snippet is in <a href="http://www.playframework.org/documentation/1.2.1/5things">Five cool things you can do with Play</a>.
+</p>
+<pre>
+Article article = Article.findById(id);
+User user = User.getConnected();
+render(article, user);
+</pre>
+<p>
+  You can access an article as &quot;article&quot;
+  and a user as &quot;user&quot; from your template.
+  But how?
+</p>
+<p>
+  play.mvc.Controller#render calls renderTemplate.
+  And renderTemplate calls <stron>play.classloading.enhancers.LocalvariablesNamesEnhancer.LocalVariablesNamesTracer</strong>.
+</p>
+<pre>
+protected static void renderTemplate(String templateName, Object... args) {
+    // Template datas
+    Map&lt;String, Object&gt; templateBinding = new HashMap&lt;String, Object&gt;(16);
+    for (Object o : args) {
+        List&lt;String&gt; names = LocalVariablesNamesTracer.getAllLocalVariableNames(o);
+        for (String name : names) {
+            templateBinding.put(name, o);
+        }
+    }
+    renderTemplate(templateName, templateBinding);
+}
+</pre>
+<p>
+  LocalVariablesNamesTracer uses <a href="http://www.csg.is.titech.ac.jp/~chiba/javassist/">Javassist</a> to implement this feature.
+</p>
+<blockquote>
+  <p>
+    Javassist (Java Programming Assistant) makes Java bytecode manipulation simple. It is a class library for editing bytecodes in Java; it enables Java programs to define a new class at runtime and to modify a class file when the JVM loads it.
+  </p>
+</blockquote>
+<p>
+  Actually LocalVariablesNamesTracer is just a getter,
+  LocalvariablesNamesEnhancer manupilate bytecode
+  to store information of variables.
+</p>
+<pre>
+// Si c'est un store de la variable en cours d'examination
+// et que c'est dans la frame d'utilisation de cette variable on trace l'affectation.
+// (en fait la frame commence à localVariableAttribute.startPc(i)-1 qui est la première affectation
+//  mais aussi l'initialisation de la variable qui est deja tracé plus haut, donc on commence à localVariableAttribute.startPc(i))
+if (varNumber == localVariableAttribute.index(i) && index >= localVariableAttribute.startPc(i) && index < localVariableAttribute.startPc(i) + localVariableAttribute.codeLength(i)) {
+
+    jv.compileStmnt(&quot;play.classloading.enhancers.LocalvariablesNamesEnhancer.LocalVariablesNamesTracer.addVariable(\&quot;&quot; + aliasedName + &quot;\&quot;, &quot; + name + &quot;);&quot;);
+</pre>
+<p>
+  <q>If you are good enough with me / I will speak French for you</q> ;)
+</p>
