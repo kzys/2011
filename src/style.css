@@ -151,7 +151,7 @@ article .header h2 {
   font-size: 1em;
   margin-bottom: 1em;
 }
-article .header .permalink {
+article .header .permalink, #paginator a {
   font-size: 200%;
   color: #ccc !important;
   text-decoration: none;
