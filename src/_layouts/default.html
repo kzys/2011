@@ -23,20 +23,24 @@
     {{ content }}
     <footer>
       <div class="inner">
-        <p class="intro">
-          {% if page.title %}
-          This post is a part of
-          <a href="http://blog.8-p.info/">my blog</a>.
-          {% else %}
-          Hello.
-          {% endif %}
-          My name is
-          <a href="http://8-p.info/me/">Kato Kazuyoshi</a>.
-          I code for food, and for fun.
-        </p>
-        <p>
-          Feel free to contact me at kato.kazuyoshi@gmail.com.
-        </p>
+        <div class="text">
+          <p>
+            {% if page.title %}
+            This post is a part of
+            <a href="http://blog.8-p.info/">my blog</a>.
+            {% else %}
+            Hello.
+            {% endif %}
+            My name is
+            <a href="http://8-p.info/me/">Kato Kazuyoshi</a>.
+            I code for food, and for fun.
+          </p>
+          <p>
+            Feel free to contact me at kato.kazuyoshi@gmail.com.
+          </p>
+        </div>
+        <div id="badge">
+          <a href="http://rubykaigi.org/2011/"><img src="/2011/160x90attendee.png" alt="RubyKaigi 2011 Attendee"/></a>
       </div>
     </footer>
 
