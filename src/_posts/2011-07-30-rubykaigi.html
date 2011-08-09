@@ -1,0 +1,94 @@
+---
+title: The 2nd day of RubyKaigi - Net::HTTP Strikes Back
+layout: post
+---
+<p>
+  Of course, RubyKaigi was held at July 16 to 18. Sorry for my laziness.
+</p>
+<h3>Elise Huard - Actors on stage</h3>
+<p>
+  Elise talked about parallel programming and actors.
+  Personally, I want to know about
+  &quot;how to design actor<string>s</string>&quot; or
+  &quot;<em>pattern</em> of actors&quot;.
+  So I asked on the session and talked after the session.
+  She answerd:
+</p>
+<ul>
+  <li>First, you should split your problem into actors.</li>
+  <li>And don't share mutable state with actors.</li>
+  <li>&quot;Supervisor&quot; is very common pattern to build
+    fault-tolerant system.</li>
+</ul>
+
+<h3>Eric Hodel - Writing Friendly Libraries</h3>
+<p>
+  Eric (Dr. Brain) talked about
+  &quot;how to design/implement/release&quot; friendly libraries.
+  I remembered Microsoft Press's &quot;Framework Design Guidelines&quot;.
+</p>
+
+<h3>Richard Huang - Use rails_best_practices to refactor your rails codes</h3>
+<p>
+  Richard (@flyerhzm) talked about his library, rails_best_practices.
+  It's Perl::Critic for Rails.
+  And their internal expression is S-expression. Long live Lisp!
+</p>
+
+<h3>Wen-Tien Chang - BDD style Unit Testing</h3>
+<p>
+  Wen (@ihower) talked about RSpec.
+  Several years ago, I think RSpec is &quot;just a syntax&quot;.
+  But maybe it's time to rethink about RSpec.
+  His talk gave good opportunity for me.
+</p>
+
+<h3>Chris Kowalik - Efficient JavaScript integration testing with Ruby and V8 engine</h3>
+<p>
+  Chris talked about Mike. His fast headless-browser.
+  I think it's really big project and V8 is not so good for embedding.
+  I asked on the session and after the session.
+</p>
+<dl>
+  <dt>I think V8 is not good for embedding. We don't have multiple instances per process.</dt>
+  <dd>Well, but V8 has <a href="http://code.google.com/intl/ja-JP/apis/v8/embed.html#contexts">context</a> to separete their execution environment.</dd>
+  <dt>Browser is really big software. Will you implement renderer?</dt>
+  <dd>No. Mike doesn't need renderer.</dd>
+  <dt>
+    libxml2 can parse broken HTML, but their behavior is not documented well.
+    Do you have a plan to support HTML5 parsing?
+  </dt>
+  <dd>
+    Sometimes. But my first goal is finish.
+  </dd>
+</dl>
+
+<h3>Yehuda Katz - Advancing Net::HTTP</h3>
+<p>
+  Yehuda Katz talked about Net::HTTP,
+  asynchronous programming and reactor model.
+  His talk was powerful. I was impressed.
+</p>
+
+<h3>Kakutani Shintaro - The Gate</h3>
+<p>
+  Kakutani talked about his story,
+  or history between Ruby, RubyKaigi and himself.
+</p>
+<p>
+  Sometime, my friends (especially, non-Ruby programmers) say
+  &quot;Ruby programmers are too enthusiastic&quot;.
+  Well. However, several years ago, Ruby was a yet another minor language.
+  But some people love and use.
+  Now we have many developers, implementations, businesses and JIS X 3017!
+</p>
+<p>
+  Enthusiasm is not so bad.
+  Do you want to use your favorite language on your business?
+</p>
+
+<h3>Party</h3>
+<p>
+  Really interesting and exciting. I met many people and drunk a lot.
+  And I talked with Yehuda Katz and Matz!
+</p>
