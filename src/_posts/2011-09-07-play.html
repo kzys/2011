@@ -1,0 +1,28 @@
+---
+title: Play 2.0 and exceptions
+layout: post
+---
+<p>
+  On May,
+  <a href="http://blog.8-p.info/2011/05/04/play.html">I read Play a little</a>
+  and wrote:
+</p>
+<blockquote>
+  <p>
+    Honestly, I don't know why Play uses an exception.
+    It's not straightforward for me.
+  </p>
+</blockquote>
+<p>
+  Then today I read a
+  <a href="http://news.ycombinator.com/item?id=2968948">discussion</a>
+  about Play 2.0 on Hacker News.
+</p>
+<ul>
+  <li>Normally, exceptions are slow in Java
+    because we need to generate stack trace.</li>
+  <li>However Play overrides <code>fillInStackTrace</code>
+    to avoid the issue.</li>
+  <li>Then Play 2.0 doesn't use exceptions for flow control.</li>
+</ul>
+<p>Well, my feeling was right.</p>
