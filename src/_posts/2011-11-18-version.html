@@ -1,0 +1,40 @@
+---
+title: How to versionize own fork of CPAN modules?
+layout: post
+---
+<p>
+  <a href="http://search.cpan.org/dist/Regexp-Optimizer-0.15/">Regexp::Optimizer 0.15</a> doesn't work well with Perl 5.14.
+  Yesterday I fixed and bumped up the version to 0.15_google.
+  Well, &quot;google&quot; is just an example.
+  I mean, I added a suffix to distinguish our version from the original.
+  However I couldn't use the version on Perl.
+</p>
+<pre>
+% perl -Mversion -e 'warn version->parse(&quot;0.15_google&quot;)'
+Invalid version format (non-numeric data) at -e line 1.
+%
+</pre>
+<p>
+  I thought a little and found a <em>leet</em> solution to the problem.
+</p>
+<pre>
+% perl -Mversion -e 'warn version->parse(&quot;0.15_900913&quot;)'
+0.15_900913 at -e line 1.
+%
+</pre>
+<p>
+  How cool? but many companies can't use the trick.
+</p>
+<h3>We need a new version specification for Carton era</h3>
+<p>
+  I think <a href="https://github.com/miyagawa/carton">Carton</a>
+  will give us the definitive way to manage dependencies on
+  Perl applications.
+  Then version.pm should provide more expressive way to
+  distinguish many versions.
+</p>
+<p>
+  rpm, dpkg and <a href="http://semver.org/">Semantic Versioning</a>
+  allow to use alphabet on version numbers.
+  Why don't we follow the predecessors?
+</p>
