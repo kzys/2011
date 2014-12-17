@@ -1,5 +1,5 @@
 all:
-	jekyll --no-auto --url http://blog.8-p.info/2011/
+	jekyll build
 
 install: all
 	rsync -rvz --delete _site/ 49.212.0.70:/home/kzys/nginx/blog.8-p.info/2011/
